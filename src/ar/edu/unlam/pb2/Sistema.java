@@ -2,21 +2,24 @@ package ar.edu.unlam.pb2;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
+import ar.edu.unlam.pb2.interfaces.Denunciable;
 
 public class Sistema {
 	
-	private Transaccion transaccion;
 	private List<Transaccion> transacciones = new ArrayList<Transaccion>();
+	private Set<Denunciable> listaNegra;
 	
 	public Sistema() {
 	}
 
-	public Transaccion getTransaccion() {
-		return transaccion;
+	public Set<Denunciable> getListaNegra() {
+		return listaNegra;
 	}
 
-	public void setTransaccion(Transaccion transaccion) {
-		this.transaccion = transaccion;
+	public void setListaNegra(Set<Denunciable> listaNegra) {
+		this.listaNegra = listaNegra;
 	}
 
 	public List<Transaccion> getTransacciones() {
@@ -27,8 +30,9 @@ public class Sistema {
 		this.transacciones = transacciones;
 	}
 
-	public void agregarAListaDeTransacciones(Transaccion extraccion) {
-		if(extraccion.monitorear())
+	public Boolean agregarAListaDeTransacciones(Transaccion extraccion) {
+		transacciones.add(extraccion);
+		return extraccion.monitorear(listaNegra);
 	}
 	
 	

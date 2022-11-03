@@ -1,16 +1,20 @@
 package ar.edu.unlam.pb2;
 
+import java.util.Set;
+
+import ar.edu.unlam.pb2.interfaces.Denunciable;
 import ar.edu.unlam.pb2.interfaces.Monitoreable;
 
 public class Transaccion implements Monitoreable {
-	
-	private Cliente cliente;
-	private Dispositivo pc;
-	private Integer score;
 
-	public Transaccion(Cliente cliente, Dispositivo pc) {
+	private Cliente cliente;
+	private Dispositivo dispositivo;
+	private Double monto;
+
+	public Transaccion(Cliente cliente, Dispositivo dispositivo, Double monto) {
 		this.cliente = cliente;
-		this.pc = pc;
+		this.dispositivo = dispositivo;
+		this.monto = monto;
 	}
 
 	public Cliente getCliente() {
@@ -21,27 +25,43 @@ public class Transaccion implements Monitoreable {
 		this.cliente = cliente;
 	}
 
-	public Dispositivo getPc() {
-		return pc;
+	public Dispositivo getDispositivo() {
+		return dispositivo;
 	}
 
-	public void setPc(Dispositivo pc) {
-		this.pc = pc;
-	}
-	
-
-	public Integer getScore() {
-		return score;
+	public void setDispositivo(Dispositivo dispositivo) {
+		this.dispositivo = dispositivo;
 	}
 
-	public void setScore(Integer score) {
-		this.score = score;
+	public Double getMonto() {
+		return monto;
+	}
+
+	public void setMonto(Double monto) {
+		this.monto = monto;
 	}
 
 	@Override
-	public Boolean monitorear() {
-		if(this.getCliente().getCUIT())
+	public Boolean monitorear(Set<Denunciable> lista) {
+		Integer score = 0;
+		if (lista.contains(this.getCliente().getCUIT())) {
+			score += 80;
+		}
+		if (lista.contains(this.getDispositivo().getIp())) {
+			score += 80;
+		}
+
+		if (this.getMonto() == this.getCliente().getSaldo()) {
+			score += 40;
+		}
 		
+		if(score>=80) {
+			return Boolean.FALSE;
+		} else {
+			return Boolean.TRUE;
+		}
+		
+
 	}
 
 }
