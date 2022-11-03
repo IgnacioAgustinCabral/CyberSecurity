@@ -40,7 +40,7 @@ public class Transaccion implements Monitoreable {
 
 	@Override
 	public Boolean monitorear() {
-		return true;
+		if(this.getCliente().getCUIT())
 		
 	}
 

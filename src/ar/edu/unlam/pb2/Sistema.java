@@ -26,6 +26,11 @@ public class Sistema {
 	public void setTransacciones(List<Transaccion> transacciones) {
 		this.transacciones = transacciones;
 	}
+
+	public void agregarAListaDeTransacciones(Transaccion extraccion) {
+		if(extraccion.monitorear())
+	}
+	
 	
 	
 

@@ -10,7 +10,8 @@ public class CyberSecurityTest {
 	public void queSePuedaCrearUnCliente() {
 		String CUIT = "21-40123321-3";
 		String nombre = "Pedro";
-		Cliente cliente = new Cliente(CUIT,nombre);
+		Double saldo = 1550.25;
+		Cliente cliente = new Cliente(CUIT,nombre,saldo);
 		
 		assertNotNull(cliente);
 	}
@@ -37,7 +38,7 @@ public class CyberSecurityTest {
 		String nombre = "Pedro";
 		Double saldo = 1550.25;
 		Cliente cliente = new Cliente(CUIT,nombre,saldo);
-		
+				
 		///Dispositivo
 		String SO = "Windows";
 		String IP = "190.0.0.0";
